@@ -1,0 +1,30 @@
+version: '2'
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+    - "4369:4369"
+    - "5671:5671"
+    - "5672:5672"
+    - "15671:15671"
+    - "15672:15672"
+    - "25672:25672"
+  postgres:
+    image: postgres:11
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+    - "5432:5432"
+  pqadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: a@a.a
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+    - "80:80"
+    - "443:443"
+    depends_on:
+    - postgres
