@@ -17,14 +17,15 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
     - "5432:5432"
-  pqadmin:
+  pgadmin:
     image: dpage/pgadmin4
     restart: always
+    volumes:
+      - "./data/pgadmin/servers.json:/pgadmin4/servers.json"
     environment:
       PGADMIN_DEFAULT_EMAIL: a@a.a
       PGADMIN_DEFAULT_PASSWORD: postgres
     ports:
-    - "80:80"
-    - "443:443"
+    - "8888:80"
     depends_on:
     - postgres
